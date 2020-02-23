@@ -39,26 +39,65 @@ class App extends React.Component {
 // The random number needs to be between 0 and 100 and showing no decimals 
 // Add to the log text area saying "Random Number to " and then the new number generated on a new line.  
 
+randomNumber = () => {
+  // logChecker()
+  const randomNum = Math.floor(Math.random() * 100) + 1 ;
+  this.setState({
+      numberHeader: randomNum,
+      log: "Random Number to"
+  })
+  // console.log('hello world', randomNum);
+  // alert('hello world');
+}
+
 
 // Add a Function to be called when the Increment Number is clicked to change the Number Header State
 // If the number will be above 100 (an increment from 100 to 101) display an error stating that the maximum number is 100 
 // Add to the log text area saying "Incremented Number to " and then the new number generated on a new line.  
+incrementNumber = () =>{
+  // numberChecker()
+  const randomNum = Math.floor(Math.random() * 100) + 1;
+  this.setState({
+    numberHeader: this.state.numberHeader + randomNum,
+    log: "Incremented Number to"
+    })
+  // if (this.state.numberHeader > 101) {
+  // }
+  console.log('Increment Number', this.state.numberHeader);
+  // alert('this is increment');
+}
 
 
 
 // If the number is greater than or equal to 50, then the number header needs to be a red. If the number is below 50, then the number header needs to be a blue. 
 
   render() {
+    let logText, errorText;
+    if(this.state.numberHeader <= 50){
+    logText = <div>{this.state.log} {this.state.numberHeader}</div> 
+    } else if (this.state.numberHeader > 100){
+    logText = <div style={{ color: 'red' }}>{this.state.log} {this.state.numberHeader}</div>
+    errorText = <div>Max is 100</div>
+    }
+    
+
+
     return (
       <div className="App">
-          <h1>{this.state.numberHeader}</h1>
+          <h1> {this.state.numberHeader}</h1>
+          {logText}
+          {errorText}
+    
         
-          <button> Random Number</button> &nbsp;
-          <button> Increment Number</button>
+          <button
+          onClick={this.randomNumber}> Random Number</button> &nbsp;
+          <button
+          onClick={this.incrementNumber}> Increment Number</button>
           <br></br>
           <br></br>
           {/* Add a text area for the log */}
-          <p> By: Your Name - Date Test was Taken</p>
+          {/* {logText} */}
+          <p> By: Devin Mallett - 2/23/20</p>
           <p>	&#169; 2019 World Shipping, Inc.</p>
       </div>
     );
